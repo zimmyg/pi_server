@@ -9,16 +9,16 @@ var path_util =  require('path');
 var rootPath = '/media/pi/HDD/'; // default root
 var args = process.argv.slice(2); // first two args are always node + filename
 if (args && args.length) {
-   rootPath = args.[0];
-   
-   // validate that this is a valid directory path
-   var validPath = fs.existsSync(rootPath) && fs.statSync(filepath).isDir();
-   if (validPath && rootPath.substr(-1) !== '/') {
-      rootPath += '/';
-   } else if (!validPath) {
-      console.log('Invalid root path ' + rootPath + '. Failed to start.');
-      return;
-   }
+   rootPath = args[0];
+}
+
+// validate that this is a valid directory path
+var validPath = fs.existsSync(rootPath) && fs.statSync(filepath).isDir();
+if (validPath && rootPath.substr(-1) !== '/') {
+   rootPath += '/';
+} else if (!validPath) {
+   console.log('Invalid root path ' + rootPath + '. Failed to start.');
+   return;
 }
 
 var server = http.createServer(function onRequest (req, res) {
